@@ -2,7 +2,7 @@
 (function ($) {
 	"use strict"; 
 	$.session.clear();
-	var servidorr='http://dyser.net/js/app';
+	var servidorr='https://ascinalss.herokuapp.com/servidor';
 
 
 	const contenido=document.querySelector('#formss');
