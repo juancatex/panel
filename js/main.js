@@ -2,7 +2,7 @@
 (function ($) {
 	"use strict"; 
 	$.session.clear();
-	var servidorr='http://localhost/servidor';
+	var servidorr='http://dyser.net/js/app';
 
 
 	const contenido=document.querySelector('#formss');
