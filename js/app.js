@@ -66,6 +66,7 @@ const contenido=document.querySelector('#conten');
   }
   function closesession(){  
       firebase.auth().signOut();
+      location.reload();
   }
 
 
