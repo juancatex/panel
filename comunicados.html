@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Ascinalss - Publicaciones</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 	
+		<link rel="icon" type="image/png" href="images/icons/logo.png"/> 
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css"> 
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css"> 
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css"> 
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css"> 
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css"> 
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css"> 
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css"> 
+	<link rel="stylesheet" type="text/css" href="css/loading.css"> 
+	
+</head>
+<body>
+	 
+		<div class="container-login100" style="    position: initial;">
+		  
+				<div class=" col-md-10 container p-l-50 p-r-50 p-t-50 p-b-50" style="background: #fff;border-radius: 3px;	overflow: hidden;">
+					<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+						  <a class="navbar-brand" href="#" target="">Ascinalss</a>
+						  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						  </button>
+						   <div class="collapse navbar-collapse" id="navbarColor02">
+							<ul class="navbar-nav mr-auto">
+								  <li class="nav-item">
+									<a class="nav-link" href="panel.html"  >Volver al panel principal</a>
+								</li> 
+							</ul> 
+						  </div> 
+					</nav>
+					<h3 class="page-header text-center">Panel de Comunicados</h3>
+					<div  role="alert" id="mensajess"> 
+					</div> 
+							<div class="row">
+								<div class="col-sm-12">
+									<button onclick="openModal_new()" class="btn btn-primary" data-toggle="modal"><span class="fa fa-plus"></span>  Nuevo</button>
+									<table class="table table-responsive-sm table-sm table-bordered" style="margin-top:20px;font-size: small;">
+										<thead class="thead-dark" style="background-color: lightgray;">
+											<tr>
+												<th class="text-center align-middle">Titulo</th>
+												<th class="text-center align-middle">Detalle</th>
+												<th class="text-center align-middle">Contenido</th>
+												<th class="text-center align-middle" style="width: 100px;">Fecha</th>					
+												<th class="text-center align-middle" style="width: 70px;">Nuevo</th>
+												<th class="text-center align-middle" style="width: 70px;">Estado</th>
+												<th class="text-center align-middle" style="width: 80px;">Publicado por</th>
+												<th class="text-center align-middle" style="width: 100px;">Opciones</th>
+											</tr>
+										</thead>
+										<tbody id="comunicadosBody"> 
+										</tbody>
+									</table>
+									<div id="waitt" class="col-md-12" style="text-align: center;"></div>
+								</div>
+							</div>
+				</div>
+				<div id="modalView" > 
+				</div>
+		</div> 
+	 
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script> 
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script> 
+	<script src="vendor/select2/select2.min.js"></script> 
+	<script src="js/jquery.session.js"></script>
+	<script src="js/com.js"></script> 
+	  
+</body>
+</html>
