@@ -8,6 +8,15 @@
                     array('image' => 'https://ascinalss.herokuapp.com/social/ani04.jpg'),
                     array('image' => 'https://ascinalss.herokuapp.com/social/ani05.jpg'),
     ); 
+
+
+    // $fotos = array (array('image' => 'http://www.ascinalss.org/ascinalss/movil/social/ani01.jpg'),
+    // array('image' => 'http://www.ascinalss.org/ascinalss/movil/social/ani02.jpg'),
+    // array('image' => 'http://www.ascinalss.org/ascinalss/movil/social/ani03.jpg'),
+    // array('image' => 'http://www.ascinalss.org/ascinalss/movil/social/ani04.jpg'),
+    // array('image' => 'http://www.ascinalss.org/ascinalss/movil/social/ani05.jpg'),  ); 
+ 
+
     $valores = array('titulo'=>$titulo, 'contenido'=>$contenido, 'fotos'=>$fotos); 
     echo json_encode($valores); 
 ?>
