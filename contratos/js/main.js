@@ -16,7 +16,7 @@
 <label for="numero">Ingrese su Carnet de Identidad :</label>
 				  <div class="wrap-input100 validate-input m-b-16" data-validate = "Carnet de Identidad">
 					  
-					  <input class="input100" id="numero" type="number" min="99999" max="999999999" name="numero" placeholder="Carnet de Identidad" autocomplete="off">
+					  <input class="input100" id="numero" type="number" min="99999" max="999999999" name="num" placeholder="Carnet de Identidad" autocomplete="off">
 					  <span class="focus-input100"></span>
 					  <span class="symbol-input100">
 						  <span class="lnr lnr-user"></span>
@@ -103,53 +103,55 @@
 			 contenido.innerHTML=``;
 			 $('.login100-form-btn').html('<span class="ld ld-ring ld-spin" style=" font-size: 35px;"></span>');
 			 $('.login100-form-btn').prop('disabled', true); 
-console.log('object:',$("#forminpout").serializeArray())
-			 $.get(servidorr+'/getsocio.php?num=680733',function(res){ 
+			 
+			 
+
+			 $.post(servidorr+'/getsocio.php', $("#forminpout").serializeArray(), function(res){ 
 				var user=JSON.parse(res); 
 console.log(user);				
 			 
-				// if(user.value>0){
-					// const contenido=document.querySelector('#formss');
-					// contenido.innerHTML=`  
-					// <div id="mensaje"> 
-							// </div>
-							// <form class="login100-form validate-form" id="form2" autocomplete="off">
-				  // <span class="login100-form-title p-b-55">
-					  // Contrato con Garante
-				  // </span>
-// <label for="inputcard">Ingrese su Carnet de Identidad :</label>
-				  // <div class="wrap-input100 validate-input m-b-16" data-validate = "Carnet de Identidad">
+				if(user.value>0){
+					const contenido=document.querySelector('#formss');
+					contenido.innerHTML=`  
+					<div id="mensaje"> 
+							</div>
+							<form class="login100-form validate-form" id="form2" autocomplete="off">
+				  <span class="login100-form-title p-b-55">
+					  Contrato con Garante
+				  </span>
+<label for="inputcard">Ingrese su Carnet de Identidad :</label>
+				  <div class="wrap-input100 validate-input m-b-16" data-validate = "Carnet de Identidad">
 					  
-					  // <input class="input100" id="inputcard" type="number" min="99999" max="999999999" name="user" placeholder="Carnet de Identidad" autocomplete="off">
-					  // <span class="focus-input100"></span>
-					  // <span class="symbol-input100">
-						  // <span class="lnr lnr-user"></span>
-					  // </span>
-				  // </div>
-// <label for="namesocio">Ingrese su nombre completo :</label>
-				  // <div class="wrap-input100 validate-input m-b-16" data-validate = "Ingrese contraseña">
-						// <input class="input100" id="namesocio" type="password" name="pass" placeholder="Contraseña" autocomplete="off">
-						// <span class="focus-input100"></span>
-						// <span class="symbol-input100">
-							// <span class="lnr lnr-lock"></span>
-						// </span>
-				  // </div> 
+					  <input class="input100" id="inputcard" type="number" min="99999" max="999999999" name="user" placeholder="Carnet de Identidad" autocomplete="off">
+					  <span class="focus-input100"></span>
+					  <span class="symbol-input100">
+						  <span class="lnr lnr-user"></span>
+					  </span>
+				  </div>
+<label for="namesocio">Ingrese su nombre completo :</label>
+				  <div class="wrap-input100 validate-input m-b-16" data-validate = "Ingrese contraseña">
+						<input class="input100" id="namesocio" type="password" name="pass" placeholder="Contraseña" autocomplete="off">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<span class="lnr lnr-lock"></span>
+						</span>
+				  </div> 
  
-				  // <div class="container-login100-form-btn p-t-25">
-					  // <button class="login100-form-btn">
-						  // Registrar
-					  // </button>
-				  // </div> 
-			  // </form> `;
-							// $('#form2').on('submit', function(e){   
-								// formulariovalue(e,this);
-							  // });
-				// }else{ 
-					// const contenido=document.querySelector('#mensaje');
-					// contenido.innerHTML=`<div class="alert alert-danger" role="alert">El usuario y/o contraseña son incorrectas.</div>`;
-					// $('.login100-form-btn').html('Ingresar');
-			        // $('.login100-form-btn').prop('disabled', false); 
-				// }
+				  <div class="container-login100-form-btn p-t-25">
+					  <button class="login100-form-btn">
+						  Registrar
+					  </button>
+				  </div> 
+			  </form> `;
+							$('#form2').on('submit', function(e){   
+								formulariovalue(e,this);
+							  });
+				}else{ 
+					const contenido=document.querySelector('#mensaje');
+					contenido.innerHTML=`<div class="alert alert-danger" role="alert">El usuario y/o contraseña son incorrectas.</div>`;
+					$('.login100-form-btn').html('Ingresar');
+			        $('.login100-form-btn').prop('disabled', false); 
+				}
 			  }).done(function(msg){  })
     .fail(function(xhr, status, error) {
       console.log('error:',error);
