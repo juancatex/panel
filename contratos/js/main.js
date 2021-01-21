@@ -103,7 +103,7 @@
 			 contenido.innerHTML=``;
 			 $('.login100-form-btn').html('<span class="ld ld-ring ld-spin" style=" font-size: 35px;"></span>');
 			 $('.login100-form-btn').prop('disabled', true); 
-
+console.log('object:',$("#forminpout").serializeArray())
 			 $.post(servidorr+'/getsocio.php', $("#forminpout").serializeArray(), function(res){ 
 				var user=JSON.parse(res); 
 console.log(user);				
