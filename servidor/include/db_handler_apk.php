@@ -58,7 +58,7 @@ WHERE so.idfuerza=fu.idfuerza and so.idgrado=gr.idgrado and so.numpapeleta=apo.n
 				foreach ($CountReg as $row) {
 					$userid["numpapeleta"] = $row["numpapeleta"]; 
 					$userid["nombre"] = $row["nombre"];   
-					$userid["nomfuerza"] = $row["ci"];    
+					$userid["ci"] = $row["ci"];    
 				} 
 				$stmt->closeCursor();  
 				return $userid;
