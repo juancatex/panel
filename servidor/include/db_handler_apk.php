@@ -47,9 +47,9 @@ WHERE so.idfuerza=fu.idfuerza and so.idgrado=gr.idgrado and so.numpapeleta=apo.n
 	 } 
 	 public function getstatussocio($num) {
 		  /*se debe de validar el usuario debe ser unico*/
-		$stmt = $this->conn->prepare("SELECT so.numpapeleta,concat(UPPER(so.nombre),' ',UPPER(so.apaterno),' ',UPPER(so.amaterno)) as nombre,:u as ci 
+		$stmt = $this->conn->prepare("SELECT so.numpapeleta,concat(UPPER(so.nombre),' ',UPPER(so.apaterno),' ',UPPER(so.amaterno)) as nombre,'1334225' as ci 
 FROM par_grados gr,apo__total_aportes apo,par_fuerzas fu,socios so  
-WHERE so.idfuerza=fu.idfuerza and so.idgrado=gr.idgrado and so.numpapeleta=apo.numpapeleta and so.ci like ':u%'");
+WHERE so.idfuerza=fu.idfuerza and so.idgrado=gr.idgrado and so.numpapeleta=apo.numpapeleta and so.ci like '1334225%'");
 	    $stmt->bindParam(':u', $num); 
         if ($stmt->execute()) {
             $CountReg = $stmt->fetchAll(PDO::FETCH_ASSOC);
