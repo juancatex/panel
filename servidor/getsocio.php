@@ -9,7 +9,7 @@
        else
 	    echo json_encode(array ('value'=>1,'data'=>$salida));  
     }else{ 
-	  echo json_encode(array ('value'=>0));  	
+	  echo json_encode(array ('value'=>100));  	
 	}
 	 
 ?>
