@@ -45,6 +45,33 @@ WHERE so.idfuerza=fu.idfuerza and so.idgrado=gr.idgrado and so.numpapeleta=apo.n
         }
 		 
 	 } 
+	 public function getstatussocio($num) {
+		  /*se debe de validar el usuario debe ser unico*/
+		$stmt = $this->conn->prepare("SELECT so.numpapeleta,concat(UPPER(so.nombre),' ',UPPER(so.apaterno),' ',UPPER(so.amaterno)) as nombre,':u' as ci 
+FROM par_grados gr,apo__total_aportes apo,par_fuerzas fu,socios so  
+WHERE so.idfuerza=fu.idfuerza and so.idgrado=gr.idgrado and so.numpapeleta=apo.numpapeleta and so.ci like ':u%'");
+	    $stmt->bindParam(':u', $num); 
+        if ($stmt->execute()) {
+            $CountReg = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			if (count($CountReg) >= 1) {
+				$userid = array(); 
+				foreach ($CountReg as $row) {
+					$userid["numpapeleta"] = $row["numpapeleta"]; 
+					$userid["nombre"] = $row["nombre"];   
+					$userid["nomfuerza"] = $row["ci"];    
+				} 
+				$stmt->closeCursor();  
+				return $userid;
+		    }else{
+				$stmt->closeCursor();  
+                return null; 
+			}
+        } else { 
+			$stmt->closeCursor();  
+            return null;
+        }
+		 
+	 }
 	  public function getProducts($aportes) { 
 		$stmt = $this->conn->prepare("SELECT p.idescala,p.idfactor,p.nomproducto,p.garantes,p.tasa,p.plazominimo,p.plazomaximo,mo.nommoneda,mo.codmoneda,mo.tipocambio 
 FROM par__productos p,par__monedas mo WHERE p.moneda=mo.idmoneda and p.activo=1 order by p.nomproducto");
