@@ -1,4 +1,5 @@
 <?php 
+header('Access-Control-Allow-Origin: *');
  if(!empty($_POST["num"])){ 
    require_once 'include/db_handler_apk.php';  
     				$db = new DbHandler();   
