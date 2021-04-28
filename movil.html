@@ -47,30 +47,82 @@
 				</div>
 			 
 		</div> 
-	 
+		 <div class="modal fade" id="modalcelular" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content"> 
+			  <div class="modal-body">
+					  <form class="contact-form" id="contact-form-data">
+						<div class="row"> 
+							<div class="col-12" id="resultmodal"></div> 
+							  
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="phone">Ingrese su numero de celular:</label>
+									<div class="input-group mb-2 mr-sm-2">
+										<div class="input-group-prepend">
+										<div class="input-group-text">+591</div>
+										</div>
+										<input id="numcel" name='cel' data-inputmask="'mask': '999-99999'"   class="form-control">
+									</div>
+								
+								</div>  
+							</div>
+							
+							<div class="col-md-4" id="grupobuttonn">
+								<button class="btn btn-large btn-rounded btn-purple btn-hvr-blue d-block mt-4 contact_btn" type="submit" id="sign-in-button-moa"> 
+									<i class="fa fa-spinner fa-spin mr-2 d-none" aria-hidden="true"></i>
+									<b>Validar</b> 
+								</button>
+							</div>
+
+						</div>
+					</form>
+			  </div> 
+			</div>
+		  </div>
+		</div>
+		
+		
+		
+		
+		<div class="modal fade" id="modalcode" tabindex="-1" role="dialog" aria-labelledby="exampleModalCode" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content"> 
+			  <div class="modal-body">
+					 <form class="contact-form" id="modal-contact-getcode">
+						<div class="row"> 
+							<div class="col-12" id="quote_result_code"></div>  
+								<div class="col-md-12">
+									<div class="form-group"> 
+									<input style="font-size: 35px; text-align: center; letter-spacing: 24px;" type="text" class="form-control" id="codein" name="codein"  autofocus >
+									</div> 
+								</div>  
+							<div class="col-md-12">  
+								<button class="btn btn-large btn-rounded btn-blue btn-hvr-pink modal_validate_code" type="submit" > 
+									<i class="fa fa-spinner fa-spin mr-2 d-none" aria-hidden="true"></i>
+									<b>Validar código</b> 
+								</button>
+							</div> 
+						</div>
+					</form>
+			  </div> 
+			</div>
+		  </div>
+		</div>
+		
 	<script src="vendorcss/jquery/jquery-3.2.1.min.js"></script> 
 	<script src="vendorcss/bootstrap/js/popper.js"></script>
 	<script src="vendorcss/bootstrap/js/bootstrap.min.js"></script> 
 	<script src="vendorcss/select2/select2.min.js"></script> 
 	<script src="js/jquery.session.js"></script>  
+	<script src="js/dist/inputmask.js"></script>
+	<script src="js/dist/jquery.inputmask.js"></script>
+	<script src="js/dist/bindings/inputmask.binding.js"></script> 
 	<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-auth.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script> 
 	<script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-storage.js"></script>
-	
-	<script> 
-	  var firebaseConfig = {
-		apiKey: "AIzaSyDgvieNQcyHU0su0TjcFvMjeOJTd6nVKBo",
-		authDomain: "ascinalss-movil.firebaseapp.com",
-		databaseURL: "https://ascinalss-movil.firebaseio.com",
-		projectId: "ascinalss-movil",
-		storageBucket: "ascinalss-movil.appspot.com",
-		messagingSenderId: "361410683377",
-		appId: "1:361410683377:web:ed3a5b6a0465461d08e450",
-		measurementId: "G-3YRJMYB905"
-	  }; 
-	  firebase.initializeApp(firebaseConfig);   
-	</script>
+	 
 	<script src="js/app.js"></script>
 </body>
 </html>

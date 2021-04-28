@@ -1,7 +1,143 @@
- 
+  var firebaseConfig = {
+		apiKey: "AIzaSyDgvieNQcyHU0su0TjcFvMjeOJTd6nVKBo",
+		authDomain: "ascinalss-movil.firebaseapp.com",
+		databaseURL: "https://ascinalss-movil.firebaseio.com",
+		projectId: "ascinalss-movil",
+		storageBucket: "ascinalss-movil.appspot.com",
+		messagingSenderId: "361410683377",
+		appId: "1:361410683377:web:ed3a5b6a0465461d08e450",
+		measurementId: "G-3YRJMYB905"
+	  }; 
+	  firebase.initializeApp(firebaseConfig); 
+	  
+	  window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button-moa', {
+    'size': 'invisible',
+    'callback': function(response) {
+        validatedata(); 
+    }
+  });
+
+  recaptchaVerifier.render().then(function(widgetId) {
+    window.recaptchaWidgetId = widgetId;  
+  });
+  
 if(typeof $.session.get("user") === 'undefined'){
     window.location.href = '/'; 
 } 
+ function validatedata() { 
+    $(".contact_btn").attr("disabled", "disabled");
+    $(".contact_btn b").text('Validando');
+    $(".contact_btn i").removeClass('d-none');
+ 
+    var output;
+    var proceed = true; 
+    var errormensaje = 'Ingrese datos para validar.';
+ 
+    $('#contact-form-data input').each(function() {
+        proceed = proceed?$(this).val().length != 0:false;
+        
+        
+         if(proceed===false){ 
+           switch($(this).attr('name')){
+                case 'ci': 
+                case 'name':  
+                errormensaje='Debe ingresar un carnet de indetidad válido.';break;
+                case 'cel':  
+                errormensaje='Debe ingresar su numero de celular.';break; 
+            }
+            return false;
+        }else if($(this).attr('name')=='cel'){  
+            proceed=($(this).val().replace(/\_/g, '').replace(/\-/g, '')).length==8;
+            errormensaje='El número de celular es incorrecto.'; 
+        }
+    });
+ 
+    if (proceed) {
+       
+        sendsms(); 
+    }
+    else
+    {
+        grecaptcha.reset(window.recaptchaWidgetId); 
+        output = '<div class="alert alert-danger" style="padding:10px 15px; margin-bottom:30px;">'+errormensaje+'</div>';
+        $("#resultmodal").hide().html(output).slideDown();
+        $(".contact_btn i").addClass('d-none');    
+        $(".contact_btn b").text('Validar');
+    }
+
+
+};
+function sendsms(){
+   
+    const phoneNumber = '+591'+($("#numcel").val()).replace('-', ''); 
+    const appVerifier = window.recaptchaVerifier;
+    firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+        .then((confirmationResult) => { 
+          window.confirmationResult = confirmationResult;  
+		 $('#modalcelular').modal('hide');		  
+		 $('#modalcode').modal('show'); 
+		
+        }).catch((error) => {
+           grecaptcha.reset(window.recaptchaWidgetId);
+          console.log('error:',error);
+         
+          if(error.code=='auth/too-many-requests'){
+            
+            output = '<div class="alert alert-danger" style="padding:10px 15px; margin-bottom:30px;">Excedio la cantidad maxima de peticiones, intentelo mas tarde porfavor.</div>';
+            $("#resultmodal").hide().html(output).slideDown();
+            $(".contact_btn i").addClass('d-none');   
+            $(".contact_btn b").text('Validar');
+          }else{
+            output = '<div class="alert alert-danger" style="padding:10px 15px; margin-bottom:30px;">'+error.code+'<br>'+error.message+'.</div>';
+            $("#resultmodal").hide().html(output).slideDown();
+            $(".contact_btn i").addClass('d-none');   
+            $(".contact_btn b").text('Validar');
+          }
+        });
+    }
+   
+$("#modal-contact-getcode").submit(function(e){ 
+    e.preventDefault();  
+     
+    $(".modal_validate_code i").removeClass('d-none'); 
+    $("#quote_result_code").html('');
+    $(".modal_validate_code b").text('Validando código ingresado');
+    $( ".modal_validate_code" ).prop( "disabled", true ); 
+    var output;
+    var proceed = "true";  
+    $('#modal-contact-getcode input').each(function() {
+        if(!$(this).val()){
+            proceed = "false";
+        }
+    });
+ 
+    if (proceed === "true") {
+        $( "#sign-in-button" ).prop( "disabled", true ); 
+        $("#grupobuttonn").addClass('d-none');  
+        $( "#codein" ).prop( "disabled", true ); 
+        window.confirmationResult.confirm($("#codein").val()).then((result) => {
+              $('#modalcode').modal('hide'); 
+                
+        }).catch((error) => {
+            console.log(error);
+            $( "#codein" ).prop( "disabled", false );
+            output = '<div class="alert alert-danger" style="padding:10px 15px; margin-bottom:30px;">El código ingresado no es el correcto.</div>';
+            $("#quote_result_code").hide().html(output).slideDown();
+            $(".modal_validate_code i").addClass('d-none');   
+            $(".modal_validate_code b").text('Validar código');
+           
+          });
+    }
+    else {
+         
+            output = '<div class="alert alert-danger" style="padding:10px 15px; margin-bottom:30px;">Debe ingresar el codigo enviado.</div>';
+            $("#quote_result_code").hide().html(output).slideDown();
+            $(".modal_validate_code i").addClass('d-none');  
+            $(".modal_validate_code b").text('Validar código');
+    }
+
+});
+
 const contenido=document.querySelector('#conten'); 
   firebase.auth().onAuthStateChanged(function(user) {
 	 
@@ -45,9 +181,9 @@ const contenido=document.querySelector('#conten');
   botonesnuevo();
     } else {
         contenido.innerHTML=`<div class="col-sm-12">
-        <button id="acceder" type="button" class="btn btn-primary"><span class="fa fa-plus"></span>  Acceder</button> 
+        <button id="acceder" type="button" data-toggle="modal" data-target="#modalcelular" class="btn btn-primary"><span class="fa fa-plus"></span>  Acceder</button> 
          </div>`;
-         botonacceder();
+        // botonacceder();
     } 
   });
 
