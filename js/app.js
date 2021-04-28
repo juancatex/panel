@@ -280,8 +280,7 @@ const contenido=document.querySelector('#conten');
     });
 }
 function sendtoken(e){
-	console.log(e);
-	//sendnotifiapp(tokens);
+	 sendnotifiapp(e);
 }
  function tablecreated(){
     
