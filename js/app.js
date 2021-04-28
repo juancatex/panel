@@ -249,16 +249,15 @@ const contenido=document.querySelector('#conten');
 					    $('#idbotonnuevocancelar').prop('disabled', true);
 						$( "#idbotonnuevo" ).addClass( "d-none" );
 						$( "#idbotonnuevo2" ).removeClass( "d-none" ) ; 
-						var nummm=$.trim($( "#inputGroupSelect01 option:selected" ).val()); 
+						 
 					   var usersession=JSON.parse($.session.get("user")); 
 
   firebase.firestore().collection('tokens_ascinalss').orderBy("ape").onSnapshot(query => { 
+  const tokens=[];
             query.forEach(doc => { 
-                if (doc.data().hasOwnProperty('numpapeleta')) { 
-                    console.log(doc.data());
-					console.log("doc:",doc);
-					   /*firebase.firestore().collection('privateComunicado').doc(nummm).set({
-						   num: nummm,
+                if (doc.data().hasOwnProperty('numpapeleta')) {  
+					  firebase.firestore().collection('privateComunicado').doc(doc.data().numpapeleta).set({
+						   num: doc.data().numpapeleta,
 						   titulo:$.trim($("#titulo").val()),
 						   detalle:$.trim($("#detalle").val()),
 						   contenido:$.trim($("#contenido").val()),
@@ -266,27 +265,23 @@ const contenido=document.querySelector('#conten');
 						   nombre:usersession.nombre,
 						   creador:usersession.user
 					   }).then((res) => { 
-						 firebase.firestore().collection('tokens_ascinalss').where("numpapeleta", "==",nummm).get({ source: "server"}).then(querySnapshot => {  
-							 const tokens=[];
-							querySnapshot.forEach(doc => {   
-								tokens.push(doc.id);
-							 }); 
-							 sendnotifiapp(tokens);
-						  }); 
-
+						 tokens.push(doc.id);
 					   }).catch((e) => {
 						   console.log('error:', e);
-					   }); */
+					   }); 
                 }
-            })
+            });
+			sendtoken(tokens);
+			
         });
-					   
-					   
-
+				 
 				});
     });
 }
-
+function sendtoken(e){
+	console.log(e);
+	
+}
  function tablecreated(){
     
     firebase.firestore().collection('privateComunicado').onSnapshot(query => { 
