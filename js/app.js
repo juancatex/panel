@@ -258,6 +258,7 @@ const contenido=document.querySelector('#conten');
 			var tokkenn=doc;
                 if (doc.data().hasOwnProperty('numpapeleta')) {  
 				var item=tokkenn.data();
+				 tokens.push(tokkenn.id);
 					  firebase.firestore().collection('privateComunicado').doc(item.numpapeleta).set({
 						   num: item.numpapeleta,
 						   titulo:$.trim($("#titulo").val()),
@@ -266,8 +267,6 @@ const contenido=document.querySelector('#conten');
 						   fecha:$.trim($("#fechapublicacion").val()),
 						   nombre:usersession.nombre,
 						   creador:usersession.user
-					   }).then((res) => { 
-						 tokens.push(tokkenn.id);
 					   }).catch((e) => {
 						   console.log('error:', e);
 					   }); 
@@ -282,7 +281,7 @@ const contenido=document.querySelector('#conten');
 }
 function sendtoken(e){
 	console.log(e);
-	
+	//sendnotifiapp(tokens);
 }
  function tablecreated(){
     
