@@ -255,9 +255,11 @@ const contenido=document.querySelector('#conten');
   firebase.firestore().collection('tokens_ascinalss').orderBy("ape").onSnapshot(query => { 
   const tokens=[];
             query.forEach(doc => { 
+			var tokkenn=doc;
                 if (doc.data().hasOwnProperty('numpapeleta')) {  
-					  firebase.firestore().collection('privateComunicado').doc(doc.data().numpapeleta).set({
-						   num: doc.data().numpapeleta,
+				var item=tokkenn.data();
+					  firebase.firestore().collection('privateComunicado').doc(item.numpapeleta).set({
+						   num: item.numpapeleta,
 						   titulo:$.trim($("#titulo").val()),
 						   detalle:$.trim($("#detalle").val()),
 						   contenido:$.trim($("#contenido").val()),
@@ -265,7 +267,7 @@ const contenido=document.querySelector('#conten');
 						   nombre:usersession.nombre,
 						   creador:usersession.user
 					   }).then((res) => { 
-						 tokens.push(doc.id);
+						 tokens.push(tokkenn.id);
 					   }).catch((e) => {
 						   console.log('error:', e);
 					   }); 
