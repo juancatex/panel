@@ -157,7 +157,7 @@ const contenido=document.querySelector('#conten');
        margin-top: 20px;
        padding: 7px;">
        
-       <div class="col-md row"> 
+       <div class="col-md-12"> 
        <button onclick="closesession()" class="btn btn-danger btn-sm btn-block " style="font-size: 10px;">cerrar session</button>
        </div>
      </div></div><div class="col-sm-12">
