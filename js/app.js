@@ -299,7 +299,7 @@ function sendtoken(e){
         }
     });
  }
- const setuserselected=async(user,iddelete)=>{
+/* const setuserselected=async(user,iddelete)=>{
     const tablevalue=document.querySelector('#tablevalue');
     try {
       const url= await firebase.storage().ref().child('socios/img'+user.num+'.png').getDownloadURL(); 
@@ -333,8 +333,23 @@ function sendtoken(e){
 
     }
     
+ }*/
+ const setuserselected=(user,iddelete)=>{
+    const tablevalue=document.querySelector('#tablevalue');
+   tablevalue.innerHTML+=` <tr> 
+        <td  class=" align-middle"><h1 class="text-hide" style="background-image: url('images/avatar.png'); width: 50px; height: 50px;  background-size: cover;"></h1>${user.num}</td>
+        <td  class=" align-middle">${user.titulo}</td>
+        <td class="text-center align-middle">${user.detalle}</td>		 
+        <td class="text-center align-middle">${user.contenido}</td>		 
+        <td class="text-center align-middle">${user.fecha}</td>	 
+        <td class="text-center align-middle">${user.nombre}</td>	 
+        <td class="text-center align-middle">
+         <button onclick="deletee('${iddelete}')"  class="btn btn-danger btn-sm btn-block" >
+         <span class="fa fa-trash"></span> Eliminar</button>
+      </td>
+    </tr>`;
+    
  }
-
 
 function eschucha1(e){
     funcionrprivado();
