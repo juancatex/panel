@@ -256,7 +256,7 @@ const contenido=document.querySelector('#conten');
             query.forEach(doc => { 
                 if (doc.data().hasOwnProperty('numpapeleta')) { 
                     console.log(doc.data());
-					
+					console.log("doc:",doc);
 					   /*firebase.firestore().collection('privateComunicado').doc(nummm).set({
 						   num: nummm,
 						   titulo:$.trim($("#titulo").val()),
