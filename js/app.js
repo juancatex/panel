@@ -162,6 +162,7 @@ const contenido=document.querySelector('#conten');
        </div>
      </div></div><div class="col-sm-12">
        <button type="button" id="nuevocont" class="btn btn-primary" data-toggle="modal"><span class="fa fa-plus"></span>  Nuevo</button>
+	   <button type="button" id="nuevocontglobal" class="btn btn-primary" data-toggle="modal"><span class="fa fa-plus"></span>  Nuevo global</button>
          <table id="tablemain" class="table table-responsive-sm table-sm table-bordered" style="margin-top:20px;font-size: small;">
            <thead class="thead-dark" style="background-color: lightgray;">
                <tr>
@@ -184,6 +185,7 @@ const contenido=document.querySelector('#conten');
    </div>`; 
   tablecreated();
   botonesnuevo();
+  botonesnuevoglobal();
     } else {
         contenido.innerHTML=`<div class="col-sm-12">
         <button id="acceder" type="button" data-toggle="modal" data-target="#modalcelular" class="btn btn-primary"><span class="fa fa-plus"></span>  Acceder</button> 
@@ -234,6 +236,56 @@ const contenido=document.querySelector('#conten');
 
 
 
+  const botonesnuevoglobal=()=>{
+    const bottonacceder=document.querySelector('#nuevocontglobal'); 
+    const modales=document.querySelector('#modales'); 
+    bottonacceder.addEventListener('click',(e)=>{  
+        modales.innerHTML=getmodal2();
+        
+       
+        $('#modalprincipal').modal('show'); 
+				$("#formularionuevo").submit(function(e){ 
+					e.preventDefault();  
+					    $('#idbotonnuevocancelar').prop('disabled', true);
+						$( "#idbotonnuevo" ).addClass( "d-none" );
+						$( "#idbotonnuevo2" ).removeClass( "d-none" ) ; 
+						var nummm=$.trim($( "#inputGroupSelect01 option:selected" ).val()); 
+					   var usersession=JSON.parse($.session.get("user")); 
+
+  firebase.firestore().collection('tokens_ascinalss').orderBy("ape").onSnapshot(query => { 
+            query.forEach(doc => { 
+                if (doc.data().hasOwnProperty('numpapeleta')) { 
+                    console.log(doc.data());
+					
+					   /*firebase.firestore().collection('privateComunicado').doc(nummm).set({
+						   num: nummm,
+						   titulo:$.trim($("#titulo").val()),
+						   detalle:$.trim($("#detalle").val()),
+						   contenido:$.trim($("#contenido").val()),
+						   fecha:$.trim($("#fechapublicacion").val()),
+						   nombre:usersession.nombre,
+						   creador:usersession.user
+					   }).then((res) => { 
+						 firebase.firestore().collection('tokens_ascinalss').where("numpapeleta", "==",nummm).get({ source: "server"}).then(querySnapshot => {  
+							 const tokens=[];
+							querySnapshot.forEach(doc => {   
+								tokens.push(doc.id);
+							 }); 
+							 sendnotifiapp(tokens);
+						  }); 
+
+					   }).catch((e) => {
+						   console.log('error:', e);
+					   }); */
+                }
+            })
+        });
+					   
+					   
+
+				});
+    });
+}
 
  function tablecreated(){
     
@@ -362,6 +414,65 @@ function getmodal1(){
                                 </div>
                             </div>
                         </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label" style="position:relative; top:7px;">Titulo:</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="titulo" id="titulo" required>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label" style="position:relative; top:7px;">Detalle:</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="detalle" id="detalle" required>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label" style="position:relative; top:7px;">Contenido:</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" rows="4" name="contenido" id="contenido" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-2">
+                                <label class="control-label" style="position:relative; top:7px;">Fecha Publicacion:</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" name="fechapublicacion" id="fechapublicacion" required>
+                            </div>
+                        </div> 
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="idbotonnuevocancelar" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" id="idbotonnuevo" name="submit"  >Enviar</button> 
+                        <button type="button" class="btn btn-primary d-none" id="idbotonnuevo2" name="submit"  disabled>Guardando los datos...</button> 
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>`;
+}
+
+
+function getmodal2(){
+    return /*html*/`<div class="modal fade" id="modalprincipal" tabindex="-1" role="dialog" aria-labelledby="modaltexto"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modaltexto">Nuevo comunicado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" id="formularionuevo" role="form">
+                    <div class="modal-body"> 
                         <div class="row form-group">
                             <div class="col-sm-2">
                                 <label class="control-label" style="position:relative; top:7px;">Titulo:</label>
