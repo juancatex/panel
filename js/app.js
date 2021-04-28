@@ -142,17 +142,22 @@ const contenido=document.querySelector('#conten');
   firebase.auth().onAuthStateChanged(function(user) {
 	 
     if (user) { 
-        
+        /*
+		<div class="col-md-auto row" style="align-content: center;  margin: 0px;  padding: 4px;">
+       <img src="${user.photoURL}" class="rounded"  >
+       </div> 
+		<div class="col-md row"> 
+		<h6 style="padding: 4px;">${user.displayName}</h6>
+       <button onclick="closesession()" class="btn btn-danger btn-sm btn-block " style="font-size: 10px;">cerrar session</button>
+       </div>
+		*/
        contenido.innerHTML=`<div class="col-md-12 container"><div class="text-center mx-auto rounded row" 
        style=" max-width: 200px;
        border: 1px solid gray;
        margin-top: 20px;
        padding: 7px;">
-       <div class="col-md-auto row" style="align-content: center;  margin: 0px;  padding: 4px;">
-       <img src="${user.photoURL}" class="rounded"  >
-       </div>
-       <div class="col-md row">
-       <h6 style="padding: 4px;">${user.displayName}</h6>
+       
+       <div class="col-md row"> 
        <button onclick="closesession()" class="btn btn-danger btn-sm btn-block " style="font-size: 10px;">cerrar session</button>
        </div>
      </div></div><div class="col-sm-12">
